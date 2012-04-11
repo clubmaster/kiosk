@@ -34,6 +34,7 @@ $('input').keyboard(
         usePreview: false,
         visible: function(e, keyboard, el) {
             if( !cmcl.keysbound &&  $('#input_search')[0] === el ) {
+                
                 $("#input_search").getkeyboard().$allKeys.click( function() {
                     var search = $('#input_search').val(),
                         regExp = new RegExp(search, 'i');
@@ -48,6 +49,7 @@ $('input').keyboard(
                         }); 
                     }  
                 });
+                
                 cmcl.keysbound = true;
             }
         }

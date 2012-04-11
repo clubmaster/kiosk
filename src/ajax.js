@@ -47,7 +47,6 @@ cmcl.ajax.getUsers = function() {
     };
 
     $.ajax( settings );
-    console.log(cmcl);
     cmcl.incrementLoading();
 };
 
