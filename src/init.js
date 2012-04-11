@@ -22,7 +22,7 @@ Date.prototype.toYYYYMMDD = function() {
 };
 
 // Setup virtual keyboard.
-$('input').keyboard(
+$('input.key').keyboard(
     {
         layout: 'danish-qwerty',
         autoAccept: true,
@@ -48,8 +48,8 @@ $('input').keyboard(
                             };
                         }); 
                     }  
+                    cmcl.updateBookingButton();
                 });
-                
                 cmcl.keysbound = true;
             }
         }
@@ -62,9 +62,6 @@ $('#button_logout').hide();
 $("#booking_date_picker").datepicker(
     {
         dateFormat: 'yy-mm-dd',
-        showOn: "button",
-        buttonImage: "images/calendar.png",
-        buttonImageOnly: true,
         minDate: 0,
         onSelect: function(dateString) {
             var date = new Date(dateString);
@@ -117,9 +114,13 @@ $('#user_search_dialog').dialog(
                 $('#user_search_dialog').dialog('close');
             }
         },
+        open: function() {
+            cmcl.updateBookingButton();
+        },
         close: function() {
             $('#input_search').val('');
             $('#search_results').children().remove();
+            cmcl.updateBookingButton();
         }
     }
 );

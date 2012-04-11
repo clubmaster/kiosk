@@ -24,7 +24,7 @@
 		
 		<div id="page_booking" class="box vert pack-center full-width">
 			<h1>Her kan du booke en bane. Tryk på tidspunktet du ønsker at reservere, vælg en partner og tryk book. Husk du skal være logget ind.</h1>
-			<p align="center"><input id="booking_date_picker" disabled='true'/></p>
+			<p align="center"><input style="text-align:center;" id="booking_date_picker" readonly="readonly" class="ui-corner-all ui-widget-content"/></p>
 
 			<div id="overflow" class="relative box flex vert">
 			
@@ -44,16 +44,16 @@
 
 <div id="login_dialog" title="Login Dialog">
 	<label class="box">Brugernavn</label>
-	<input class="box" id='input_username' />
+	<input class="box key" id='input_username' />
 	<label class="box">Password</label>
-	<input class="box" id='input_password' type='password' />
+	<input class="box key" id='input_password' type='password' />
 	<label id="login_dialog_error" class="box"></label>
 </div>
 
 
 <div id="user_search_dialog" title="Partner Søgning">
 	<label class="box">Søgefelt</label>
-	<input class="box" style="width:250px;" id='input_search' />
+	<input class="box key" style="width:250px;" id='input_search' />
 	
 	<select id='search_results' style="width:250px;" size='6'></select>
 </div>

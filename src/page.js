@@ -119,6 +119,16 @@ cmcl.updateLoading = function() {
     }
 };
 
+
+cmcl.updateBookingButton = function() {
+    var user_id = $('#search_results').val();
+    if(user_id) {
+        $(".ui-dialog-buttonpane button:contains('Book Bane')").button("enable");
+    } else {
+        $(".ui-dialog-buttonpane button:contains('Book Bane')").button("disable");
+    }
+};
+
 (function() {
 
 //  $('#button_booking').click(function() {
@@ -136,9 +146,13 @@ cmcl.updateLoading = function() {
       cmcl.updateFields();
   });
   
-   // Fetch initial data from server.
-   cmcl.ajax.getUsers();
+  $('#search_results').click(function() {
+      cmcl.updateBookingButton();
+  });
+  
+  // Fetch initial data from server.
+  cmcl.ajax.getUsers();
    
-   // Fetch initial fields data from server.
-   cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
+  // Fetch initial fields data from server.
+  cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
 })();
