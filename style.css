@@ -1,0 +1,175 @@
+body {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: start;
+	
+	overflow: hidden;
+	
+	margin: 0;
+	padding: 0;
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 0.8em;
+	color: #222222;
+}
+
+app {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	text-align: center;
+	font-weight: normal;
+	font-size: 1em;
+	border: 1px solid #E0E0E0;
+	padding: 10px; 
+}
+
+input {
+	padding: 5px;
+}
+
+label {
+	padding: 5px; 
+}
+
+.box {
+	display: -webkit-box;
+}
+
+.flex {
+	-webkit-box-flex: 1;
+}
+
+.vert {
+	-webkit-box-orient: vertical;
+}
+
+.hori {
+	-webkit-box-orient: horizontal;
+}
+
+.pack-center {
+	-webkit-box-pack: center;
+}
+
+.pack-justify {
+	-webkit-box-pack: justify;
+}
+
+.align-stretch {
+	-webkit-box-align: stretch;
+}
+
+.hidden {
+	display: none;
+}
+
+.pad15 {
+	padding: 15px;
+}
+
+.pad10 {
+	padding: 10px;
+}
+
+.mar5 {
+	margin: 5px;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.relative {
+	position: relative;
+}
+
+.field {
+	display: block;
+	height: 80px;
+}
+
+.interval_wrapper {
+	position: absolute;
+	display: block;
+	height: 75px;
+	text-align:center;
+}
+
+.interval {
+	width: 90%;
+	height: 90%;
+	margin: 5px;
+	border: 1px solid #E0E0E0;
+	text-align:center;
+	background-color: #FFFFFF;
+}
+
+.overflow {
+	overflow: auto;
+}
+
+.book-user {
+ 	background: -webkit-linear-gradient(top, rgba(191,204,255,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%);
+}
+
+.book-normal {
+	background: -webkit-linear-gradient(top, rgba(255,175,175,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%);
+}
+
+#login_dialog_error { 
+	color: red; 
+}
+
+#overflow {
+	border: 1px solid #E0E0E0;
+	background-color: #F0F0F0;
+	overflow: auto;
+}
+
+.field:nth-child(even) { 
+	background-color: #F0F0F0;	
+}
+.field:nth-child(odd) {
+	background-color: #E5E5E5;
+}
+
+#loadmask {
+	width: 100%;
+	height: 100%; 
+	background-image: url('./images/loading.gif'); 
+	background-repeat: no-repeat;
+	background-position: center;
+	z-index: 2000;
+}
+
+option {
+	display: box;
+	height: 50px;
+	line-height: 50px;
+}
+
+::-webkit-scrollbar {
+    width: 25px;
+    height: 25px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.5); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.4); 
+}

@@ -1,0 +1,77 @@
+<html>
+<head>
+	<meta charset="utf-8">
+ 	<link href="style.css" rel="stylesheet" type="text/css">
+   	<link href="keyboard.css" rel="stylesheet" type="text/css">
+   	<link href="smoothness.css" rel="stylesheet" type="text/css" />
+   	<link href="loadmask.css" rel="stylesheet" type="text/css" />
+   	
+	<script type="text/javascript" src="plugins/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="plugins/jquery.base64.js"></script>
+	<script type="text/javascript" src="plugins/jquery.keyboard.js"></script>
+	<script type="text/javascript" src="plugins/jquery.loadmask.js"></script>
+	<script type="text/javascript" src="plugins/date.js"></script>
+	<script type="text/javascript" src="plugins/danish.js"></script>
+	<script type="text/javascript" src="plugins/jquery-ui-1.8.18.custom.min.js"></script>
+	<script type="text/javascript" src="plugins/jquery.ui.datepicker-da.js"></script>
+</head>
+<body onload="">
+	
+<app class="box vert pack-justify">
+	
+	<!-- Pages div -->
+	<div id="pages" class="box flex hori pack-center mar5">
+		
+		<div id="page_booking" class="box vert pack-center full-width">
+			<h1>Her kan du booke en bane. Tryk på tidspunktet du ønsker at reservere, vælg en partner og tryk book. Husk du skal være logget ind.</h1>
+			<p align="center"><input id="booking_date_picker" disabled='true'/></p>
+
+			<div id="overflow" class="relative box flex vert">
+			
+			</div>
+		</div>
+	
+	</div>
+	
+	<!-- Button bar -->	
+	<div class="box hori pack-center mar5">
+		<!-- <button id='button_booking'>Booking</button>  -->
+		<button id='button_login'>Login</button>
+		<button id='button_logout'>Logout</button>
+	</div>
+	
+</app>
+
+<div id="login_dialog" title="Login Dialog">
+	<label class="box">Brugernavn</label>
+	<input class="box" id='input_username' />
+	<label class="box">Password</label>
+	<input class="box" id='input_password' type='password' />
+	<label id="login_dialog_error" class="box"></label>
+</div>
+
+
+<div id="user_search_dialog" title="Partner Søgning">
+	<label class="box">Søgefelt</label>
+	<input class="box" style="width:250px;" id='input_search' />
+	
+	<select id='search_results' style="width:250px;" size='6'></select>
+</div>
+
+<div id="error_dialog" title="Fejlbesked">
+	<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><div id="error_message">Fejl med internettet prøv igen...</div>
+</div>
+
+<div id="loadmask"></div>
+
+
+</body>
+
+<script type="text/javascript" src="src/init.js"></script>
+<script type="text/javascript" src="src/ajax.js"></script>
+<script type="text/javascript" src="src/page.js"></script>
+
+</html>
+
+
+
