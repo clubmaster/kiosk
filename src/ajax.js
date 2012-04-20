@@ -12,7 +12,7 @@ cmcl.ajax.login = function(username, password) {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#login_dialog_error').text('Forkert brugernavn | password');
+        $('#login_dialog_error').text('Forkert brugernavn el. password');
         cmcl.decrementLoading();
     };
     var settings = {

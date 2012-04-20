@@ -90,6 +90,16 @@ cmcl.updateBookings = function() {
             intervalObject.button.click( function() {
                 cmcl.ajax.cancelBooking(booking.id);
             });
+        } else if(type === 'team' || type === 'plan') {
+//            $.each(booking.fields, function(index, field_booking) {
+//                var fieldId = field_booking.id;
+//                var startTime = booking.first_date;
+//                var intervalObject = cmcl.data.intervalObjects[startTime + '_' + fieldId];
+//
+//                intervalObject.element.addClass('book-team');
+//                
+//            });
+//            
         }
     });
 };
@@ -160,6 +170,10 @@ cmcl.resize = function() {
   
   $('#search_results').click(function() {
       cmcl.updateBookingButton();
+  });
+  
+  $('#refresh_image').click(function() {
+      location.reload();
   });
   
   window.onresize = cmcl.resize;
