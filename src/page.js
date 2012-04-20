@@ -6,7 +6,7 @@ cmcl.changePage = function(page) {
 
 cmcl.updateFields = function() {
     var data = cmcl.data.fields[ cmcl.data.bookingdate.toYYYYMMDD() ],
-        hourWidth = 150,
+        hourWidth = 115,
         hours = Math.ceil(new Date( new Date(data.info.end_time) - new Date(data.info.start_time) ).getHours());
     
     $('#overflow').children().remove();
@@ -17,7 +17,7 @@ cmcl.updateFields = function() {
             class: "field"
         });
         
-        fieldElement.width('100%');
+        fieldElement.width(hours * hourWidth - hourWidth / 2);
         $('#overflow').append(fieldElement);
         
         
@@ -43,7 +43,6 @@ cmcl.updateFields = function() {
             
             cmcl.data.intervalObjects[interval.start_time + '_' + interval.field] = intervalObject;
             
-            intervalElement.css('opacity', past ? 0.5 : 1);
             button.button( {
                 disabled: past || !loggedIn
             });
@@ -83,7 +82,7 @@ cmcl.updateBookings = function() {
             intervalObject.button.button(
                 {
                     disabled: !userBooking,
-                    label: userBooking ? 'Aflys Booking' : 'Booked'
+                    label: userBooking ? 'Aflys' : 'Booked'
                 }
             );
             
@@ -129,6 +128,18 @@ cmcl.updateBookingButton = function() {
     }
 };
 
+cmcl.resize = function() {
+    var body = $('body');
+    var width = body.width();
+    var height = body.height();
+    var scaleY = height / 1200;
+    var scaleX = width / 1920;
+    var bgScale = scaleX > scaleY ? scaleX : scaleY;
+    
+    $('#bgimage').css('-webkit-transform', 'scale(' + bgScale + ', ' + bgScale + ')');
+    $('#bgimage').css('-webkit-transform-origin', '0% 0%');
+};
+
 (function() {
 
 //  $('#button_booking').click(function() {
@@ -144,15 +155,20 @@ cmcl.updateBookingButton = function() {
       $('#button_logout').hide();
       $('#button_login').show();
       cmcl.updateFields();
+      cmcl.updateBookings();
   });
   
   $('#search_results').click(function() {
       cmcl.updateBookingButton();
   });
   
+  window.onresize = cmcl.resize;
+  
   // Fetch initial data from server.
   cmcl.ajax.getUsers();
    
   // Fetch initial fields data from server.
   cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
+  
+  cmcl.resize();
 })();

@@ -27,7 +27,7 @@ $('input.key').keyboard(
         layout: 'danish-qwerty',
         autoAccept: true,
         position: {
-            of : $('body'),
+            of : $('app'),
             my : 'center bottom',
             at : 'center bottom'
         },

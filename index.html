@@ -16,6 +16,8 @@
 	<script type="text/javascript" src="plugins/jquery.ui.datepicker-da.js"></script>
 </head>
 <body onload="">
+
+<img id='bgimage'style='position: absolute;' src="images/clay-court.jpg" />
 	
 <app class="box vert pack-center">
 	
@@ -24,7 +26,10 @@
 		
 		<div id="page_booking" class="box vert pack-center full-width">
 			<h1>Her kan du booke en bane. Tryk på tidspunktet du ønsker at reservere, vælg en partner og tryk book. Husk du skal være logget ind.</h1>
-			<p align="center"><input style="text-align:center;" id="booking_date_picker" readonly="readonly" class="ui-corner-all ui-widget-content"/></p>
+			<p align="center">
+				<input style="text-align:center;" id="booking_date_picker" readonly="readonly" class="boxshadow ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"/>
+				<span style="padding:5px; margin-left:5px;" class="boxshadow bgcolor">Vælg dato på knappen.</span>
+			</p>
 
 			<div id="overflow" class="relative box flex vert">
 			
@@ -36,7 +41,7 @@
 	<!-- Button bar -->	
 	<div class="box hori pack-center mar5">
 		<!-- <button id='button_booking'>Booking</button>  -->
-		<button id='button_login'>Login</button>
+		<button class="boxshadow" id='button_login'>Login</button>
 		<button id='button_logout'>Logout</button>
 	</div>
 	

@@ -6,22 +6,53 @@ body {
 	overflow: hidden;
 	
 	margin: 0;
-	padding: 25px;
+	padding: 0;
 	font-family: Verdana,Arial,sans-serif;
 	font-size: 0.8em;
-	color: #222222;
+	font-weight: bold;
+	color: #FFFFFF;
+	
+	/* text-shadow: 
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,	
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px,
+		#000000 0px 0px 3px
+	; */
+	
+}
+
+bg {
+	background-image: url('images/clay-court.jpg');
+	position:absolute;
+	top:0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 app {
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	top: 30px;
+	bottom: 30px;
+	left: 30px;
+	right: 30px;
 }
 
 h1 {
 	text-align: center;
-	font-weight: normal;
 	font-size: 1em;
-	border: 1px solid #E0E0E0;
+	-webkit-box-shadow: 0px 0px 5px 4px #000000;
+	
+	background-color: rgba(0, 0, 0, 0.7);
 	padding: 10px; 
 }
 
@@ -101,38 +132,44 @@ label {
 	width: 90%;
 	height: 90%;
 	margin: 5px;
-	border: 1px solid #E0E0E0;
+	border: 1px solid #404040;
 	text-align:center;
-	background-color: #FFFFFF;
-}
-
-.overflow {
-	overflow: auto;
+	
+	background: -webkit-linear-gradient(top, rgba(130,130,130,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
 }
 
 .book-user {
- 	background: -webkit-linear-gradient(top, rgba(191,204,255,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%);
+ 	background: -webkit-linear-gradient(top, rgba(130,130,255,1) 0%,rgba(9,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
 }
 
 .book-normal {
-	background: -webkit-linear-gradient(top, rgba(255,175,175,1) 0%,rgba(255,255,255,1) 20%,rgba(255,255,255,1) 100%);
+	background: -webkit-linear-gradient(top, rgba(255,90,90,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
 }
 
 #login_dialog_error { 
 	color: red; 
 }
 
+.boxshadow {
+	-webkit-box-shadow: 0px 0px 5px 4px #000000;
+}
+
+.bgcolor {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
 #overflow {
-	border: 1px solid #E0E0E0;
-	background-color: #F0F0F0;
+	border: 1px solid #202020;
+	-webkit-box-shadow: 0px 0px 5px 4px #000000;
+	background-color: rgba(0, 0, 0, 0.7) ; /* #F0F0F0 */
 	overflow: auto;
 }
 
 .field:nth-child(even) { 
-	background-color: #F0F0F0;	
+	background-color: rgba(0, 0, 0, 0.2);	
 }
 .field:nth-child(odd) {
-	background-color: #E5E5E5;
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 #loadmask {
@@ -166,7 +203,7 @@ option {
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background: rgba(0,0,0,0.5); 
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0.8) 80%,rgba(255,255,255,0.8) 100%);
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
