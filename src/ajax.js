@@ -7,8 +7,8 @@ cmcl.ajax.login = function(username, password) {
         $('#button_login').hide();
         
         cmcl.data.user = $.parseJSON(json).data;
-        cmcl.updateFields();
-        cmcl.updateBookings();
+        cmcl.booking.updateFields();
+        cmcl.booking.updateBookings();
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
@@ -53,7 +53,7 @@ cmcl.ajax.getUsers = function() {
 cmcl.ajax.getFields = function(locationid, date) {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.fields[date.toYYYYMMDD()] = $.parseJSON(json).data;
-        cmcl.updateFields();
+        cmcl.booking.updateFields();
         
         cmcl.ajax.getBookings(locationid, date);
         cmcl.decrementLoading();
@@ -77,7 +77,7 @@ cmcl.ajax.getFields = function(locationid, date) {
 cmcl.ajax.getBookings = function(locationid, date) {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.bookings[date.toYYYYMMDD()] = $.parseJSON(json).data;
-        cmcl.updateBookings();
+        cmcl.booking.updateBookings();
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
