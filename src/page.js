@@ -10,7 +10,7 @@ cmcl.updateFields = function() {
         hours = Math.ceil(new Date( new Date(data.info.end_time) - new Date(data.info.start_time) ).getHours());
     
     $('#overflow').children().remove();
-    cmcl.data.intervalObjects = {};
+    cmcl.data.intervalObjects = [];
     
     $.each(data.fields, function(index, field) {
         var fieldElement = $('<div />', {
@@ -41,7 +41,7 @@ cmcl.updateFields = function() {
                 data: interval
             };
             
-            cmcl.data.intervalObjects[interval.start_time + '_' + interval.field] = intervalObject;
+            cmcl.data.intervalObjects.push(intervalObject);
             
             button.button( {
                 disabled: past || !loggedIn
@@ -70,9 +70,9 @@ cmcl.updateBookings = function() {
     $.each(bookings, function(index, booking) {
         var type = booking.type; // booking or team
         if(type === 'booking') {
+            
             var fieldId = booking.field_id;
-            var startTime = booking.first_date;
-            var intervalObject = cmcl.data.intervalObjects[startTime + '_' + fieldId];
+            var intervalObject = cmcl.getAffectedInterval(fieldId, new Date(booking.first_date), new Date(booking.end_date))[0];
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
             var userBooking = cmcl.data.user && cmcl.data.user.id === booking.user.id && !past;
             
@@ -91,14 +91,15 @@ cmcl.updateBookings = function() {
                 cmcl.ajax.cancelBooking(booking.id);
             });
         } else if(type === 'team' || type === 'plan') {
-//            $.each(booking.fields, function(index, field_booking) {
-//                var fieldId = field_booking.id;
-//                var startTime = booking.first_date;
-//                var intervalObject = cmcl.data.intervalObjects[startTime + '_' + fieldId];
-//
-//                intervalObject.element.addClass('book-team');
-//                
-//            });
+            $.each(booking.fields, function(index, field_booking) {
+                var fieldId = field_booking.id;
+                var intervalObjects = cmcl.getAffectedInterval(fieldId, new Date(booking.first_date), new Date(booking.end_date));
+
+                $.each(intervalObjects, function(index, intervalObject) {
+                    intervalObject.element.addClass(type === 'team' ? 'book-team' : 'book-plan');
+                });
+                
+            });
 //            
         }
     });

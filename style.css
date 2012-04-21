@@ -147,7 +147,11 @@ label {
 }
 
 .book-team {
-	background: -webkit-linear-gradient(top, rgba(40,200,200,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
+	background: -webkit-linear-gradient(top, rgba(185, 59, 143 ,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
+}
+
+.book-plan {
+	background: -webkit-linear-gradient(top, rgba(186, 60, 81 ,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
 }
 
 #login_dialog_error { 

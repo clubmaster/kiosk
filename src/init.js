@@ -14,8 +14,32 @@ cmcl.data = {
     bookings: {},
     bookingdate: new Date(),
     bookinginterval: null,
-    intervalObjects: {}
+    intervalObjects: []
 };
+
+cmcl.getAffectedInterval = function(fieldId, inStartTime, inEndTime) {
+    var intervalObjects = cmcl.data.intervalObjects;
+    var foundElements = [];
+
+    $.each(intervalObjects, function(index, intervalObject) {
+        var data = intervalObject.data;
+        var startTime = new Date(data.start_time);
+        var endTime = new Date(data.end_time);
+        
+        if(data.field == fieldId) {
+            if( 
+               (inStartTime.compareTo(startTime) <= 0 && inEndTime.compareTo(endTime) >= 0) ||
+               (startTime.compareTo(inStartTime) == -1 && endTime.compareTo(inStartTime) == 1) ||
+               (startTime.compareTo(inEndTime) == -1 && endTime.compareTo(inEndTime) == 1)
+            ) {
+                foundElements.push(intervalObject);
+            }
+        }
+    });
+    
+    return foundElements;
+};
+
 
 Date.prototype.toYYYYMMDD = function() {
     return this.toString('yyyy-MM-dd');
