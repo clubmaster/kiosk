@@ -98,6 +98,8 @@ cmcl.initJQueryWidgets = function() {
                                 var fullname = user.first_name + ' ' + user.last_name+' ('+user.member_number+')';
                                 if(regExp.test(fullname)) {
                                     $('#search_results').append('<option value="' + user.id + '">' + fullname + '</option>');
+                                } else if (search == user.member_number) {
+                                    $('#search_results').append('<option value="' + user.id + '">' + fullname + '</option>');
                                 };
                             });
                         }
