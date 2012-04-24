@@ -114,6 +114,13 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     var start=new Date( data.start_time);
     var end=new Date( data.end_time);
 
+    var location_name = '';
+    $.each(cmcl.data.locations, function(index, location) {
+        if (location.id == cmcl.data.location_id) {
+          location_name = location.location_name;
+        }
+    });
+
     var field_name = '';
     var d = new Date();
     $.each(cmcl.data.fields[d.toString('yyyy-MM-dd')].fields, function(index, field) {
@@ -122,7 +129,7 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
         }
     });
 
-    $('.interval_location span').text('FIXME');
+    $('.interval_location span').text(location_name);
     $('.interval_field span').text(field_name);
     $('.interval_date span').text(start.toString('dd/MM/yyyy'));
     $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
