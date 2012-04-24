@@ -207,7 +207,7 @@ cmcl.initJQueryWidgets = function() {
 
                     cmcl.ajax.bookFieldGuest(date, interval_id);
                 },
-                "Annuller": function() {
+                "Slet": function() {
                     var booking_id = cmcl.data.bookinginterval.booking.id;
                     cmcl.ajax.cancelBooking(booking_id);
                 },

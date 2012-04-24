@@ -122,9 +122,9 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
       if (data.booking.type == 'booking') {
         var userBooking = cmcl.data.user && (cmcl.data.user.id === data.booking.user.id || (data.booking.users && cmcl.data.user.id === data.booking.users[0].id)) && !past;
         if (userBooking) {
-          $(".ui-dialog-buttonpane button:contains('Annuller')").button("enable");
+          $(".ui-dialog-buttonpane button:contains('Slet')").button("enable");
         } else {
-          $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
+          $(".ui-dialog-buttonpane button:contains('Slet')").button("disable");
         }
 
         $('.interval_partner').show();
@@ -136,15 +136,16 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
           $('.interval_partner span').text(data.booking.users[0].first_name+' '+data.booking.users[0].last_name);
         }
       } else if (data.booking.type == 'team') {
+        $(".ui-dialog-buttonpane button:contains('Slet')").button("disable");
         $('.interval_booker span').text(data.booking.team_name);
         $('.interval_partner').hide();
       } else if (data.booking.type == 'plan') {
-        console.log(data.booking);
+        $(".ui-dialog-buttonpane button:contains('Slet')").button("disable");
         $('.interval_booker span').text(data.booking.name);
         $('.interval_partner').hide();
       }
     } else {
-      $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
+      $(".ui-dialog-buttonpane button:contains('Slet')").button("disable");
       $('.interval_booker').hide();
       $('.interval_partner').hide();
     }
@@ -157,7 +158,7 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
       $(".ui-dialog-buttonpane button:contains('Book')").button("enable");
     }
 
-    if (!past && loggedIn) {
+    if (loggedIn) {
       $('#booking_dialog').dialog('open');
     } else {
       $('#interval_dialog').dialog('open');
