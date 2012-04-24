@@ -79,13 +79,13 @@ cmcl.booking.updateBookings = function() {
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
             var userBooking = cmcl.data.user && (cmcl.data.user.id === booking.user.id || (booking.users && cmcl.data.user.id === booking.users[0].id)) && !past;
 
-            intervalObject.data['booking'] = booking;
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
             intervalObject.button.button(
                 {
                     label: 'Booked'
                 }
             );
+            intervalObject.data['booking'] = booking;
         } else if(type === 'team' || type === 'plan') {
             $.each(booking.fields, function(index, field_booking) {
                 var fieldId = field_booking.id;
@@ -93,10 +93,10 @@ cmcl.booking.updateBookings = function() {
 
                 $.each(intervalObjects, function(index, intervalObject) {
                     intervalObject.element.addClass(type === 'team' ? 'book-team' : 'book-plan');
+                    intervalObject.data['booking'] = booking;
                 });
 
             });
-//
         }
     });
 };
@@ -118,21 +118,30 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
 
     if (data.booking) {
-      var userBooking = cmcl.data.user && (cmcl.data.user.id === data.booking.user.id || (data.booking.users && cmcl.data.user.id === data.booking.users[0].id)) && !past;
-      if (userBooking) {
-        $(".ui-dialog-buttonpane button:contains('Annuller')").button("enable");
-      } else {
-        $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
-      }
-
       $('.interval_booker').show();
-      $('.interval_partner').show();
+      if (data.booking.type == 'booking') {
+        var userBooking = cmcl.data.user && (cmcl.data.user.id === data.booking.user.id || (data.booking.users && cmcl.data.user.id === data.booking.users[0].id)) && !past;
+        if (userBooking) {
+          $(".ui-dialog-buttonpane button:contains('Annuller')").button("enable");
+        } else {
+          $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
+        }
 
-      $('.interval_booker span').text(data.booking.user.first_name+' '+data.booking.user.last_name);
-      if (data.booking.guest) {
-        $('.interval_partner span').text('Gæst');
-      } else if (data.booking.users) {
-        $('.interval_partner span').text(data.booking.users[0].first_name+' '+data.booking.users[0].last_name);
+        $('.interval_partner').show();
+
+        $('.interval_booker span').text(data.booking.user.first_name+' '+data.booking.user.last_name);
+        if (data.booking.guest) {
+          $('.interval_partner span').text('Gæst');
+        } else if (data.booking.users) {
+          $('.interval_partner span').text(data.booking.users[0].first_name+' '+data.booking.users[0].last_name);
+        }
+      } else if (data.booking.type == 'team') {
+        $('.interval_booker span').text(data.booking.team_name);
+        $('.interval_partner').hide();
+      } else if (data.booking.type == 'plan') {
+        console.log(data.booking);
+        $('.interval_booker span').text(data.booking.name);
+        $('.interval_partner').hide();
       }
     } else {
       $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
