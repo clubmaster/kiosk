@@ -1,15 +1,14 @@
 cmcl.ajax.login = function(username, password) {
-    var authValue = username + ':' + password;
+
+  $("#booking_dialog").dialog("close");
+  $("#interval_dialog").dialog("close");
+
+  var authValue = username + ':' + password;
     var authHeader = { 'Authorization': 'Basic ' + $.base64.encode(authValue), 'API_KEY': 'THIS_IS_A_DEMO_KEY' };
     var success = function(json, textStatus, jqXHR) {
         $('#login_dialog').dialog('close');
         $('#button_logout').show();
         $('#button_login').hide();
-
-        if ($("#interval_dialog").dialog("isOpen")) {
-          $("#interval_dialog").dialog("close");
-          $("#booking_dialog").dialog("open");
-        }
 
         cmcl.data.user = $.parseJSON(json).data;
         cmcl.booking.updateFields();
@@ -168,6 +167,7 @@ cmcl.ajax.bookFieldGuest = function(date, interval_id) {
 cmcl.ajax.cancelBooking = function(booking_id) {
     var success = function(text, textStatus, jqXHR) {
         cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate);
+        $('#booking_dialog').dialog('close');
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {

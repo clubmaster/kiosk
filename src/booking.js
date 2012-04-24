@@ -77,7 +77,7 @@ cmcl.booking.updateBookings = function() {
             var fieldId = booking.field_id;
             var intervalObject = cmcl.booking.getAffectedIntervals(fieldId, new Date(booking.first_date), new Date(booking.end_date))[0];
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
-            var userBooking = cmcl.data.user && cmcl.data.user.id === booking.user.id && !past;
+            var userBooking = cmcl.data.user && (cmcl.data.user.id === booking.user.id || (booking.users && cmcl.data.user.id === booking.users[0].id)) && !past;
 
             intervalObject.data['booking'] = booking;
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
@@ -116,7 +116,15 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     $('.interval_field span').text('FIXME');
     $('.interval_date span').text(start.toString('dd/MM/yyyy'));
     $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
+
     if (data.booking) {
+      var userBooking = cmcl.data.user && (cmcl.data.user.id === data.booking.user.id || (data.booking.users && cmcl.data.user.id === data.booking.users[0].id)) && !past;
+      if (userBooking) {
+        $(".ui-dialog-buttonpane button:contains('Annuller')").button("enable");
+      } else {
+        $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
+      }
+
       $('.interval_booker').show();
       $('.interval_partner').show();
 
@@ -127,6 +135,7 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
         $('.interval_partner span').text(data.booking.users[0].first_name+' '+data.booking.users[0].last_name);
       }
     } else {
+      $(".ui-dialog-buttonpane button:contains('Annuller')").button("disable");
       $('.interval_booker').hide();
       $('.interval_partner').hide();
     }

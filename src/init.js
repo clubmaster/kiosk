@@ -139,9 +139,6 @@ cmcl.initJQueryWidgets = function() {
                 "Login": function() {
                     cmcl.ajax.login( $('#input_username').val(), $('#input_password').val() );
                 },
-                "Annuller": function() {
-                    $('#login_dialog').dialog('close');
-                }
             },
             close: function() {
                 $('#input_username').val('');
@@ -209,6 +206,10 @@ cmcl.initJQueryWidgets = function() {
                     var interval_id = cmcl.data.bookinginterval.id;
 
                     cmcl.ajax.bookFieldGuest(date, interval_id);
+                },
+                "Annuller": function() {
+                    var booking_id = cmcl.data.bookinginterval.booking.id;
+                    cmcl.ajax.cancelBooking(booking_id);
                 },
             },
         }
