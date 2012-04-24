@@ -5,7 +5,7 @@
    	<link href="keyboard.css" rel="stylesheet" type="text/css">
    	<link href="smoothness.css" rel="stylesheet" type="text/css" />
    	<link href="loadmask.css" rel="stylesheet" type="text/css" />
-   	
+
 	<script type="text/javascript" src="plugins/jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="plugins/jquery.base64.js"></script>
 	<script type="text/javascript" src="plugins/jquery.keyboard.js"></script>
@@ -14,8 +14,8 @@
 	<script type="text/javascript" src="plugins/danish.js"></script>
 	<script type="text/javascript" src="plugins/jquery-ui-1.8.18.custom.min.js"></script>
 	<script type="text/javascript" src="plugins/jquery.ui.datepicker-da.js"></script>
-	
-	
+
+
 	<script type="text/javascript" src="src/init.js"></script>
 	<script type="text/javascript" src="src/ajax.js"></script>
 	<script type="text/javascript" src="src/page.js"></script>
@@ -24,12 +24,12 @@
 <body onload="cmcl.start();">
 
 <img id='bgimage'style='position: absolute;' src="images/clay-court.jpg" />
-	
+
 <app class="box vert pack-center">
-	
+
 	<!-- Pages div -->
 	<div id="pages" class="box flex hori pack-center mar5">
-		
+
 		<div id="page_booking" class="box vert pack-center full-width">
 			<h1>Her kan du booke en bane. Tryk på tidspunktet du ønsker at reservere, vælg en partner og tryk book. Husk du skal være logget ind.</h1>
 			<p align="center">
@@ -38,19 +38,19 @@
 			</p>
 
 			<div id="overflow" class="relative box flex vert">
-			
+
 			</div>
 		</div>
-	
+
 	</div>
-	
-	<!-- Button bar -->	
+
+	<!-- Button bar -->
 	<div class="box hori pack-center mar5">
 		<!-- <button id='button_booking'>Booking</button>  -->
 		<button class="boxshadow" id='button_login'>Login</button>
 		<button id='button_logout'>Logout</button>
 	</div>
-	
+
 </app>
 
 <img id='refresh_image' style='position: absolute; bottom: 30px; right: 30px;' src="images/refresh.png" />
@@ -63,11 +63,24 @@
 	<label id="login_dialog_error" class="box"></label>
 </div>
 
+<div id="interval_dialog" title="Interval Dialog">
+  <p>Location: <span class="interval_location"></span></p>
+  <p>Date: <span class="interval_date"></span></p>
+  <p>Time: <span class="interval_time"></span></p>
+  <p>Field: <span class="interval_field"></span></p>
+</div>
+
+<div id="booking_dialog" title="Interval Dialog">
+  <p>Location: <span class="interval_location"></span></p>
+  <p>Date: <span class="interval_date"></span></p>
+  <p>Time: <span class="interval_time"></span></p>
+  <p>Field: <span class="interval_field"></span></p>
+</div>
 
 <div id="user_search_dialog" title="Partner Søgning">
 	<label class="box">Søgefelt</label>
 	<input class="box key" style="width:250px;" id='input_search' />
-	
+
 	<select id='search_results' style="width:250px;" size='6'></select>
 </div>
 

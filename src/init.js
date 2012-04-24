@@ -179,6 +179,41 @@ cmcl.initJQueryWidgets = function() {
             }
         }
     );
+    $('#interval_dialog').dialog(
+        {
+            autoOpen: false,
+            modal: true,
+            position: 'top',
+            resizable: false,
+            draggable: false,
+            buttons: {
+                "Log ind": function() {
+                    $('#login_dialog').dialog('open');
+                },
+            },
+        }
+    );
+    $('#booking_dialog').dialog(
+        {
+            autoOpen: false,
+            modal: true,
+            position: 'top',
+            resizable: false,
+            draggable: false,
+            buttons: {
+                "Find medlem": function() {
+                    $('#user_search_dialog').dialog('open');
+                },
+                "Book med gæst": function() {
+                    var date = cmcl.data.bookingdate;
+                    var interval_id = cmcl.data.bookinginterval.id;
+
+                    cmcl.ajax.bookFieldGuest(date, interval_id);
+                },
+            },
+        }
+    );
+
     $('#error_dialog').dialog(
         {
             autoOpen: false,
@@ -188,7 +223,6 @@ cmcl.initJQueryWidgets = function() {
             draggable: false
         }
     );
-
 };
 
 

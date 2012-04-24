@@ -5,7 +5,12 @@ cmcl.ajax.login = function(username, password) {
         $('#login_dialog').dialog('close');
         $('#button_logout').show();
         $('#button_login').hide();
-        
+
+        if ($("#interval_dialog").dialog("isOpen")) {
+          $("#interval_dialog").dialog("close");
+          $("#booking_dialog").dialog("open");
+        }
+
         cmcl.data.user = $.parseJSON(json).data;
         cmcl.booking.updateFields();
         cmcl.booking.updateBookings();
@@ -24,7 +29,7 @@ cmcl.ajax.login = function(username, password) {
     };
 
     this.authHeader = authHeader;
-    
+
     $.ajax( settings );
     cmcl.incrementLoading();
 };
@@ -54,7 +59,7 @@ cmcl.ajax.getFields = function(locationid, date) {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.fields[date.toYYYYMMDD()] = $.parseJSON(json).data;
         cmcl.booking.updateFields();
-        
+
         cmcl.ajax.getBookings(locationid, date);
         cmcl.decrementLoading();
     };
@@ -99,6 +104,8 @@ cmcl.ajax.getBookings = function(locationid, date) {
 cmcl.ajax.bookField = function(date, interval_id, user_id) {
     var success = function(text, textStatus, jqXHR) {
         $('#user_search_dialog').dialog('close');
+        $('#interval_dialog').dialog('close');
+        $('#booking_dialog').dialog('close');
         cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate);
         cmcl.decrementLoading();
     };
@@ -117,6 +124,38 @@ cmcl.ajax.bookField = function(date, interval_id, user_id) {
     var settings = {
         headers: this.authHeader,
         url: this.base + 'bookings/book/' + date.toYYYYMMDD() + '/' + interval_id + '/' + user_id,
+        type: 'POST',
+        success: success,
+        error: error
+    };
+
+    $.ajax( settings );
+    cmcl.incrementLoading();
+};
+
+cmcl.ajax.bookFieldGuest = function(date, interval_id) {
+    var success = function(text, textStatus, jqXHR) {
+        $('#interval_dialog').dialog('close');
+        $('#booking_dialog').dialog('close');
+        cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate);
+        cmcl.decrementLoading();
+    };
+    var error = function(jqXHR, textStatus, errorThrown) {
+        $('#interval_dialog').dialog('close');
+        $('#booking_dialog').dialog('close');
+        if (jqXHR.status === 403) {
+            var message = $.parseJSON( jqXHR.responseText ).data;
+            $('#error_message').text(message);
+            $('#error_dialog').dialog('open');
+        } else {
+            $('#error_message').text('Fejl med internettet prøv igen...');
+            $('#error_dialog').dialog('open');
+        }
+        cmcl.decrementLoading();
+    };
+    var settings = {
+        headers: this.authHeader,
+        url: this.base + 'bookings/book/' + date.toYYYYMMDD() + '/' + interval_id + '/guest',
         type: 'POST',
         success: success,
         error: error

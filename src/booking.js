@@ -2,7 +2,7 @@
 cmcl.booking.initialize = function() {
   // Fetch initial data from server.
   cmcl.ajax.getUsers();
-   
+
   // Fetch initial fields data from server.
   cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
 };
@@ -12,19 +12,19 @@ cmcl.booking.updateFields = function() {
     var data = cmcl.data.fields[ cmcl.data.bookingdate.toYYYYMMDD() ],
         hourWidth = 115,
         hours = Math.ceil(new Date( new Date(data.info.end_time) - new Date(data.info.start_time) ).getHours());
-    
+
     $('#overflow').children().remove();
     cmcl.data.intervalObjects = [];
-    
+
     $.each(data.fields, function(index, field) {
         var fieldElement = $('<div />', {
             class: "field"
         });
-        
+
         fieldElement.width(hours * hourWidth - hourWidth / 2);
         $('#overflow').append(fieldElement);
-        
-        
+
+
         $.each(field.intervals, function(index, interval) {
             var wrapperElement = $('<div />', {
                 class: "interval_wrapper"
@@ -44,20 +44,19 @@ cmcl.booking.updateFields = function() {
                 button: button,
                 data: interval
             };
-            
+
             cmcl.data.intervalObjects.push(intervalObject);
-            
+
             button.button( {
-                disabled: past || !loggedIn
             });
             button.click( function() {
                 cmcl.booking.showBookingDialog(intervalObject);
             });
-            
-            
+
+
             wrapperElement.width(intervalDelta * hourWidth + 'px');
             wrapperElement.css('left', startDelta * hourWidth  + 'px');
-            
+
             fieldElement.append(wrapperElement);
             wrapperElement.append(intervalElement);
             intervalElement.append('<div style="margin:5px;"><span style="float:left;">'+ formatStart +'</span><span style="float:right;">' + formatEnd + '</span></div>');
@@ -65,32 +64,32 @@ cmcl.booking.updateFields = function() {
         });
 
     });
-    
+
 };
 
 
 cmcl.booking.updateBookings = function() {
     var bookings = cmcl.data.bookings[ cmcl.data.bookingdate.toYYYYMMDD() ];
-    
+
     $.each(bookings, function(index, booking) {
         var type = booking.type; // booking or team
         if(type === 'booking') {
-            
+
             var fieldId = booking.field_id;
             var intervalObject = cmcl.booking.getAffectedIntervals(fieldId, new Date(booking.first_date), new Date(booking.end_date))[0];
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
             var userBooking = cmcl.data.user && cmcl.data.user.id === booking.user.id && !past;
-            
-            
+
+
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
-            
+
             intervalObject.button.button(
                 {
                     disabled: !userBooking,
                     label: userBooking ? 'Aflys' : 'Booked'
                 }
             );
-            
+
             intervalObject.button.unbind('click');
             intervalObject.button.click( function() {
                 cmcl.ajax.cancelBooking(booking.id);
@@ -103,9 +102,9 @@ cmcl.booking.updateBookings = function() {
                 $.each(intervalObjects, function(index, intervalObject) {
                     intervalObject.element.addClass(type === 'team' ? 'book-team' : 'book-plan');
                 });
-                
+
             });
-//            
+//
         }
     });
 };
@@ -113,8 +112,32 @@ cmcl.booking.updateBookings = function() {
 
 cmcl.booking.showBookingDialog = function(intervalObject) {
     var data = intervalObject.data;
+    var loggedIn = cmcl.data.user !== null;
+    var past = new Date().compareTo( new Date(data.start_time)) >= 0;
+
     cmcl.data.bookinginterval = data;
-    $('#user_search_dialog').dialog('open');
+
+    var start=new Date( data.start_time);
+    var end=new Date( data.end_time);
+
+    $('.interval_location').text('FIXME');
+    $('.interval_date').text(start.toString('dd/MM/yyyy'));
+    $('.interval_time').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
+    $('.interval_field').text('FIXME');
+
+    if (past) {
+      $(".ui-dialog-buttonpane button:contains('Find medlem')").button("disable");
+      $(".ui-dialog-buttonpane button:contains('Book')").button("disable");
+    } else {
+      $(".ui-dialog-buttonpane button:contains('Find medlem')").button("enable");
+      $(".ui-dialog-buttonpane button:contains('Book')").button("enable");
+    }
+
+    if (!past && loggedIn) {
+      $('#booking_dialog').dialog('open');
+    } else {
+      $('#interval_dialog').dialog('open');
+    }
 };
 
 
@@ -126,9 +149,9 @@ cmcl.booking.getAffectedIntervals = function(fieldId, inStartTime, inEndTime) {
         var data = intervalObject.data;
         var startTime = new Date(data.start_time);
         var endTime = new Date(data.end_time);
-        
+
         if(data.field == fieldId) {
-            if( 
+            if(
                (inStartTime.compareTo(startTime) <= 0 && inEndTime.compareTo(endTime) >= 0) ||
                (startTime.compareTo(inStartTime) == -1 && endTime.compareTo(inStartTime) == 1) ||
                (startTime.compareTo(inEndTime) == -1 && endTime.compareTo(inEndTime) == 1)
@@ -137,7 +160,7 @@ cmcl.booking.getAffectedIntervals = function(fieldId, inStartTime, inEndTime) {
             }
         }
     });
-    
+
     return foundElements;
 };
 
