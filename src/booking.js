@@ -47,8 +47,7 @@ cmcl.booking.updateFields = function() {
 
             cmcl.data.intervalObjects.push(intervalObject);
 
-            button.button( {
-            });
+            button.button( {});
             button.click( function() {
                 cmcl.booking.showBookingDialog(intervalObject);
             });
@@ -80,20 +79,13 @@ cmcl.booking.updateBookings = function() {
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
             var userBooking = cmcl.data.user && cmcl.data.user.id === booking.user.id && !past;
 
-
+            intervalObject.data['booking'] = booking;
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
-
             intervalObject.button.button(
                 {
-                    disabled: !userBooking,
-                    label: userBooking ? 'Aflys' : 'Booked'
+                    label: 'Booked'
                 }
             );
-
-            intervalObject.button.unbind('click');
-            intervalObject.button.click( function() {
-                cmcl.ajax.cancelBooking(booking.id);
-            });
         } else if(type === 'team' || type === 'plan') {
             $.each(booking.fields, function(index, field_booking) {
                 var fieldId = field_booking.id;
@@ -120,10 +112,24 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     var start=new Date( data.start_time);
     var end=new Date( data.end_time);
 
-    $('.interval_location').text('FIXME');
-    $('.interval_date').text(start.toString('dd/MM/yyyy'));
-    $('.interval_time').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
-    $('.interval_field').text('FIXME');
+    $('.interval_location span').text('FIXME');
+    $('.interval_field span').text('FIXME');
+    $('.interval_date span').text(start.toString('dd/MM/yyyy'));
+    $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
+    if (data.booking) {
+      $('.interval_booker').show();
+      $('.interval_partner').show();
+
+      $('.interval_booker span').text(data.booking.user.first_name+' '+data.booking.user.last_name);
+      if (data.booking.guest) {
+        $('.interval_partner span').text('Gæst');
+      } else if (data.booking.users) {
+        $('.interval_partner span').text(data.booking.users[0].first_name+' '+data.booking.users[0].last_name);
+      }
+    } else {
+      $('.interval_booker').hide();
+      $('.interval_partner').hide();
+    }
 
     if (past) {
       $(".ui-dialog-buttonpane button:contains('Find medlem')").button("disable");
