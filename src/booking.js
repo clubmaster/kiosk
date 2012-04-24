@@ -140,7 +140,7 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
       $('.interval_partner').hide();
     }
 
-    if (past) {
+    if (past || data.booking) {
       $(".ui-dialog-buttonpane button:contains('Find medlem')").button("disable");
       $(".ui-dialog-buttonpane button:contains('Book')").button("disable");
     } else {
