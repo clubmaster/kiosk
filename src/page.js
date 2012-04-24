@@ -19,7 +19,9 @@ cmcl.decrementLoading = function() {
 cmcl.updateLoading = function() {
     if(cmcl.loadingcycles > 0) {
         $("#loadmask").mask();
+        $('#loadmask').show();
     } else {
         $("#loadmask").unmask();
+        $('#loadmask').hide();
     }
 };
