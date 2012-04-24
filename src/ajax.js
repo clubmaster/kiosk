@@ -54,6 +54,27 @@ cmcl.ajax.getUsers = function() {
     cmcl.incrementLoading();
 };
 
+cmcl.ajax.getLocations = function() {
+    var success = function(json, textStatus, jqXHR) {
+        cmcl.data.locations = $.parseJSON(json).data;
+        cmcl.decrementLoading();
+    };
+    var error = function(jqXHR, textStatus, errorThrown) {
+        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_dialog').dialog('open');
+        cmcl.decrementLoading();
+    };
+    var settings = {
+        url: this.base + 'locations/',
+        type: 'GET',
+        success: success,
+        error: error
+    };
+
+    $.ajax( settings );
+    cmcl.incrementLoading();
+};
+
 cmcl.ajax.getFields = function(locationid, date) {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.fields[date.toYYYYMMDD()] = $.parseJSON(json).data;

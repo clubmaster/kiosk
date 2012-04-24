@@ -3,6 +3,9 @@ cmcl.booking.initialize = function() {
   // Fetch initial data from server.
   cmcl.ajax.getUsers();
 
+  // fetch locations
+  cmcl.ajax.getLocations();
+
   // Fetch initial fields data from server.
   cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
 };
