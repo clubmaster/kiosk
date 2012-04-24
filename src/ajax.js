@@ -1,6 +1,6 @@
 cmcl.ajax.login = function(username, password) {
     var authValue = username + ':' + password;
-    var authHeader = { 'Authorization': 'Basic ' + $.base64.encode(authValue) };
+    var authHeader = { 'Authorization': 'Basic ' + $.base64.encode(authValue), 'API_KEY': 'THIS_IS_A_DEMO_KEY' };
     var success = function(json, textStatus, jqXHR) {
         $('#login_dialog').dialog('close');
         $('#button_logout').show();
