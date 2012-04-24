@@ -7,7 +7,6 @@ cmcl.booking.initialize = function() {
   cmcl.ajax.getFields(cmcl.data.location_id, cmcl.data.bookingdate );
 };
 
-
 cmcl.booking.updateFields = function() {
     var data = cmcl.data.fields[ cmcl.data.bookingdate.toYYYYMMDD() ],
         hourWidth = 115,
@@ -112,8 +111,16 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     var start=new Date( data.start_time);
     var end=new Date( data.end_time);
 
+    var field_name = '';
+    var d = new Date();
+    $.each(cmcl.data.fields[d.toString('yyyy-MM-dd')].fields, function(index, field) {
+        if (field.id == data.field) {
+          field_name = field.name;
+        }
+    });
+
     $('.interval_location span').text('FIXME');
-    $('.interval_field span').text('FIXME');
+    $('.interval_field span').text(field_name);
     $('.interval_date span').text(start.toString('dd/MM/yyyy'));
     $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
 
