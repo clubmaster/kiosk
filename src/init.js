@@ -22,9 +22,9 @@ cmcl.data = {
 cmcl.start = function() {
     cmcl.attachListeners();
     cmcl.initJQueryWidgets();
-    
+
     cmcl.booking.initialize();
-    
+
     // Setup page by doing an initial resize.
     cmcl.onresize();
 };
@@ -42,7 +42,7 @@ cmcl.onresize = function() {
     var scaleY = height / 1200;
     var scaleX = width / 1920;
     var bgScale = scaleX > scaleY ? scaleX : scaleY;
-    
+
     $('#bgimage').css('-webkit-transform', 'scale(' + bgScale + ', ' + bgScale + ')');
     $('#bgimage').css('-webkit-transform-origin', '0% 0%');
 };
@@ -52,7 +52,7 @@ cmcl.attachListeners = function() {
     $('#button_login').click(function() {
         $('#login_dialog').dialog('open');
     });
-    
+
     $('#button_logout').click(function() {
         cmcl.data.user = null;
         $('#button_logout').hide();
@@ -60,16 +60,16 @@ cmcl.attachListeners = function() {
         cmcl.booking.updateFields();
         cmcl.booking.updateBookings();
     });
-    
+
     $('#search_results').click(function() {
         cmcl.booking.updateDialogButton();
     });
-    
+
     $('#refresh_image').click(function() {
         location.reload();
     });
-    
-    window.onresize = cmcl.onresize;  
+
+    window.onresize = cmcl.onresize;
 };
 
 
@@ -87,20 +87,20 @@ cmcl.initJQueryWidgets = function() {
             usePreview: false,
             visible: function(e, keyboard, el) {
                 if( !cmcl.keysbound &&  $('#input_search')[0] === el ) {
-                    
+
                     $("#input_search").getkeyboard().$allKeys.click( function() {
                         var search = $('#input_search').val(),
                             regExp = new RegExp(search, 'i');
-                          
+
                         $('#search_results').children().remove();
                         if(search) {
                             $.each(cmcl.data.users, function(index, user) {
-                                var fullname = user.first_name + ' ' + user.last_name;
-                                if(regExp.test(fullname)) { 
+                                var fullname = user.first_name + ' ' + user.last_name+' ('+user.member_number+')';
+                                if(regExp.test(fullname)) {
                                     $('#search_results').append('<option value="' + user.id + '">' + fullname + '</option>');
                                 };
-                            }); 
-                        }  
+                            });
+                        }
                         cmcl.booking.updateDialogButton();
                     });
                     cmcl.keysbound = true;
@@ -108,10 +108,10 @@ cmcl.initJQueryWidgets = function() {
             }
         }
     );
-    
+
     $('input:submit, button').button();
     $('#button_logout').hide();
-    
+
     $("#booking_date_picker").datepicker(
         {
             dateFormat: 'yy-mm-dd',
@@ -124,7 +124,7 @@ cmcl.initJQueryWidgets = function() {
         }
     );
     $("#booking_date_picker").datepicker( "setDate" , cmcl.data.bookingdate );
-    
+
     // Setup dialogs.
     $('#login_dialog').dialog(
         {
@@ -160,7 +160,7 @@ cmcl.initJQueryWidgets = function() {
                     var date = cmcl.data.bookingdate;
                     var user_id = $('#search_results').val();
                     var interval_id = cmcl.data.bookinginterval.id;
-    
+
                     cmcl.ajax.bookField(date, interval_id, user_id);
                 },
                 "Annuller": function() {
@@ -192,6 +192,6 @@ cmcl.initJQueryWidgets = function() {
 
 // Update intervals, so that users can't press old bookings. Do this every 5 minutes.
 setInterval(function() {
-   cmcl.booking.updateFields(); 
+   cmcl.booking.updateFields();
    cmcl.booking.updateBookings();
 }, 5*60*1000);
