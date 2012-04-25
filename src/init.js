@@ -9,6 +9,7 @@ cmcl.user = {};
 cmcl.keysbound = false;
 cmcl.app = {
   'timeout': 30000,
+  'refresh_overview': 5,
   'min_height': 20,
   'min_width': 115
 }
@@ -33,11 +34,16 @@ cmcl.start = function() {
     // Setup page by doing an initial resize.
     cmcl.onresize();
 
-    var timeout = cmcl.app['timeout'];
+    // user timeout
     $(document).bind("idle.idleTimer", function(){
         cmcl.user.logout();
     });
-    $.idleTimer(timeout);
+    $.idleTimer(cmcl.app['timeout']);
+
+    // Update intervals, so that users can't press old bookings. Do this every 5 minutes.
+    setInterval(function() {
+        cmcl.booking.initialize();
+        }, cmcl.app['refresh_overview']*60*1000);
 };
 
 Date.prototype.toYYYYMMDD = function() {
@@ -223,8 +229,4 @@ cmcl.initJQueryWidgets = function() {
     );
 };
 
-// Update intervals, so that users can't press old bookings. Do this every 5 minutes.
-setInterval(function() {
-   cmcl.booking.updateFields();
-   cmcl.booking.updateBookings();
-}, 5*60*1000);
+
