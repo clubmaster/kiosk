@@ -38,19 +38,17 @@ cmcl.booking.updateFields = function() {
             var startDelta = new Date( new Date(interval.start_time) - new Date(data.info.start_time) ) / 1000 / 3600;
             var formatStart = new Date( interval.start_time).toString('HH:mm');
             var formatEnd = new Date( interval.end_time).toString('HH:mm');
-            var button = $('<button>' + field.name + '</button>');
             var past = new Date().compareTo( new Date(interval.start_time)) >= 0;
             var loggedIn = cmcl.data.user !== null;
             var intervalObject = {
                 element: intervalElement,
-                button: button,
                 data: interval
             };
 
             cmcl.data.intervalObjects.push(intervalObject);
 
-            button.button( {});
-            button.click( function() {
+            intervalElement.text(field.name);
+            intervalElement.click( function() {
                 cmcl.booking.showBookingDialog(intervalObject);
             });
 
@@ -61,7 +59,6 @@ cmcl.booking.updateFields = function() {
             fieldElement.append(wrapperElement);
             wrapperElement.append(intervalElement);
             intervalElement.append('<div style="margin:5px;"><span style="float:left;">'+ formatStart +'</span><span style="float:right;">' + formatEnd + '</span></div>');
-            intervalElement.append(button);
         });
 
     });
@@ -82,11 +79,6 @@ cmcl.booking.updateBookings = function() {
             var userBooking = cmcl.data.user && (cmcl.data.user.id === booking.user.id || (booking.users && cmcl.data.user.id === booking.users[0].id)) && !past;
 
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
-            intervalObject.button.button(
-                {
-                    label: 'Booked'
-                }
-            );
             intervalObject.data['booking'] = booking;
         } else if(type === 'team' || type === 'plan') {
             $.each(booking.fields, function(index, field_booking) {
