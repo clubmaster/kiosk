@@ -21,10 +21,15 @@ cmcl.booking.updateFields = function() {
     var fields = 0;
     var intervals = 0;
     var max_intervals = 0;
+    var start_time = new Date();
 
     $.each(data.fields, function(index, field) {
         fields++;
         $.each(field.intervals, function(index, interval) {
+            var c_time = new Date(interval.start_time);
+            if (start_time > c_time) {
+              start_time = c_time;
+            }
             intervals++;
         });
 
@@ -92,6 +97,10 @@ cmcl.booking.updateFields = function() {
       }
     }
 
+    var now = new Date();
+    var diff = now.getTime()-start_time.getTime();
+    diff = diff/1000/60/60;
+    $('#overflow').scrollLeft(hourWidth*diff);
 };
 
 
