@@ -34,7 +34,7 @@ app {
 h1 {
   text-align: center;
   font-size: 1em;
-  -webkit-box-shadow: 0px 0px 5px 4px #000000;
+  -webkit-box-shadow: 0px 0px 5px 2px #000000;
   background-color: #747474;
   opacity: 0.7;
   padding: 10px;
@@ -144,7 +144,7 @@ label {
 }
 
 .boxshadow {
-  -webkit-box-shadow: 0px 0px 5px 4px #000000;
+  -webkit-box-shadow: 0px 0px 5px 2px #000000;
 }
 
 .bgcolor {
@@ -153,7 +153,7 @@ label {
 
 #overflow {
   border: 1px solid #202020;
-  -webkit-box-shadow: 0px 0px 5px 4px #000000;
+  -webkit-box-shadow: 0px 0px 5px 2px #000000;
   background-color: #555555;
   opacity: 0.8;
   overflow: auto;
