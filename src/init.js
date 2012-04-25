@@ -8,8 +8,8 @@ cmcl.booking = {};
 cmcl.user = {};
 cmcl.keysbound = false;
 cmcl.app = {
-  'timeout': 30000,
-  'refresh_overview': 5,
+  'timeout': 30,
+  'refresh_overview': 300,
   'min_height': 20,
   'min_width': 115
 }
@@ -38,12 +38,19 @@ cmcl.start = function() {
     $(document).bind("idle.idleTimer", function(){
         cmcl.user.logout();
     });
-    $.idleTimer(cmcl.app['timeout']);
+    $.idleTimer(cmcl.app['timeout']*1000);
 
-    // Update intervals, so that users can't press old bookings. Do this every 5 minutes.
+    // update bookings
     setInterval(function() {
         cmcl.booking.initialize();
-        }, cmcl.app['refresh_overview']*60*1000);
+        }, cmcl.app['refresh_overview']*1000);
+
+    // update clock
+    setInterval(function() {
+            var d = new Date();
+            $('#clock_widget').html(d.toString('dd/MM/yyyy')+' '+d.toLocaleTimeString());
+        }, 1*1000);
+
 };
 
 Date.prototype.toYYYYMMDD = function() {

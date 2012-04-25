@@ -120,6 +120,10 @@ label {
   background: -webkit-linear-gradient(top, rgba(130,130,130,1) 75%,rgba(49,49,49,1) 95%,rgba(49,49,49,0.8) 100%);
 }
 
+.interval:hover {
+  opacity: 0.5;
+}
+
 .book-user {
   background: -webkit-linear-gradient(top, rgba(130,130,255,1) 75%,rgba(9,0,0,1) 95%,rgba(0,0,0,0.8) 100%);
 }

@@ -31,11 +31,18 @@
 	<div id="pages" class="box flex hori pack-center mar5">
 
 		<div id="page_booking" class="box vert pack-center full-width">
-			<h1>Her kan du booke en bane. Tryk på tidspunktet du ønsker at reservere, vælg en partner og tryk book. Husk du skal være logget ind.</h1>
-			<p align="center">
+                      <div width="100%">
+                        <div style="float: left; display: block;">
+                          <p><span style="padding:5px; margin-left:5px;" class="boxshadow bgcolor"><span id="clock_widget"></span></span></p>
+                        </div>
+
+                        <div style="float: right; display: block;">
+			<p>
 				<input style="text-align:center;" id="booking_date_picker" readonly="readonly" class="boxshadow ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"/>
 				<span style="padding:5px; margin-left:5px;" class="boxshadow bgcolor">Vælg dato på knappen.</span>
 			</p>
+                        </div>
+                      </div>
 
 			<div id="overflow" class="relative box flex vert">
 
