@@ -27,6 +27,16 @@ cmcl.start = function() {
 
     // Setup page by doing an initial resize.
     cmcl.onresize();
+
+    var timeout = 15000;
+    $(document).bind("idle.idleTimer", function(){
+      cmcl.data.user = null;
+      $('#button_logout').hide();
+      $('#button_login').show();
+      cmcl.booking.updateFields();
+      cmcl.booking.updateBookings();
+    });
+    $.idleTimer(timeout);
 };
 
 
@@ -225,7 +235,6 @@ cmcl.initJQueryWidgets = function() {
         }
     );
 };
-
 
 // Update intervals, so that users can't press old bookings. Do this every 5 minutes.
 setInterval(function() {
