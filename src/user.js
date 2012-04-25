@@ -7,5 +7,8 @@ cmcl.user.logout = function() {
     cmcl.data.user = null;
     $('#button_logout').hide();
     $('#button_login').show();
+
+    cmcl.booking.updateFields();
+    cmcl.booking.updateBookings();
   }
 };
