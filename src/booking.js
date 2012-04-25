@@ -69,11 +69,18 @@ cmcl.booking.updateBookings = function() {
     $.each(bookings, function(index, booking) {
         var type = booking.type; // booking or team
         if(type === 'booking') {
-
             var fieldId = booking.field_id;
             var intervalObject = cmcl.booking.getAffectedIntervals(fieldId, new Date(booking.first_date), new Date(booking.end_date))[0];
             var past = new Date().compareTo( new Date(intervalObject.data.start_time)) >= 0;
             var userBooking = cmcl.data.user && (cmcl.data.user.id === booking.user.id || (booking.users && cmcl.data.user.id === booking.users[0].id)) && !past;
+            var partner = '';
+
+            if (booking.guest) {
+              partner = 'Gæst';
+            } else if (booking.users) {
+              partner = booking.users[0].first_name+' '+booking.users[0].last_name;
+            }
+            intervalObject.element.html('<div style="margin: 5px"><span>'+booking.user.first_name+' '+booking.user.last_name+' - '+partner+'</span></div>');
 
             intervalObject.element.addClass(userBooking ? 'book-user' : 'book-normal');
             intervalObject.data['booking'] = booking;
@@ -84,9 +91,14 @@ cmcl.booking.updateBookings = function() {
 
                 $.each(intervalObjects, function(index, intervalObject) {
                     intervalObject.element.addClass(type === 'team' ? 'book-team' : 'book-plan');
+                    if (type == 'team') {
+                      intervalObject.element.html('<div style="margin: 15px"><span>'+booking.team_name+'</span></div>');
+                    } else if (type == 'plan') {
+                      intervalObject.element.html('<div style="margin: 15px"><span>'+booking.name+'</span></div>');
+                      intervalObject.element.text(booking.name);
+                    }
                     intervalObject.data['booking'] = booking;
                 });
-
             });
         }
     });
