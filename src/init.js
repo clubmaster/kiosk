@@ -22,11 +22,6 @@ cmcl.data = {
     intervalObjects: []
 };
 
-/*
-cmcl.ajax['base'] = 'http://booking.aalborgtennisklub.dk/api/';
-cmcl.data.location_id = 2;
-*/
-
 cmcl.start = function() {
     cmcl.attachListeners();
     cmcl.initJQueryWidgets();
@@ -43,24 +38,14 @@ cmcl.start = function() {
     $.idleTimer(timeout);
 };
 
-
 Date.prototype.toYYYYMMDD = function() {
     return this.toString('yyyy-MM-dd');
 };
 
 
 cmcl.onresize = function() {
-    var body = $('body');
-    var width = body.width();
-    var height = body.height();
-    var scaleY = height / 1200;
-    var scaleX = width / 1920;
-    var bgScale = scaleX > scaleY ? scaleX : scaleY;
-
-    $('#bgimage').css('-webkit-transform', 'scale(' + bgScale + ', ' + bgScale + ')');
-    $('#bgimage').css('-webkit-transform-origin', '0% 0%');
+  // nothing happens at the time :)
 };
-
 
 cmcl.attachListeners = function() {
     $('#button_login').click(function() {
