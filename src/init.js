@@ -1,11 +1,15 @@
 cmcl = { };
 cmcl.loadingcycles = 0;
 cmcl.ajax = {
-    base: 'http://demo.clubmaster.dk/api/'
+    base: 'http://demo.clubmaster.dk/api/',
+    api_key: 'THIS_IS_A_DEMO_KEY'
 };
 cmcl.booking = {};
-
+cmcl.user = {};
 cmcl.keysbound = false;
+cmcl.app = {
+  'timeout': 30000
+}
 
 cmcl.data = {
     location_id: 1,
@@ -18,6 +22,10 @@ cmcl.data = {
     intervalObjects: []
 };
 
+/*
+cmcl.ajax['base'] = 'http://booking.aalborgtennisklub.dk/api/';
+cmcl.data.location_id = 2;
+*/
 
 cmcl.start = function() {
     cmcl.attachListeners();
@@ -28,13 +36,9 @@ cmcl.start = function() {
     // Setup page by doing an initial resize.
     cmcl.onresize();
 
-    var timeout = 30000;
+    var timeout = cmcl.app['timeout'];
     $(document).bind("idle.idleTimer", function(){
-      cmcl.data.user = null;
-      $('#button_logout').hide();
-      $('#button_login').show();
-      cmcl.booking.updateFields();
-      cmcl.booking.updateBookings();
+        cmcl.user.logout();
     });
     $.idleTimer(timeout);
 };
@@ -64,11 +68,7 @@ cmcl.attachListeners = function() {
     });
 
     $('#button_logout').click(function() {
-        cmcl.data.user = null;
-        $('#button_logout').hide();
-        $('#button_login').show();
-        cmcl.booking.updateFields();
-        cmcl.booking.updateBookings();
+        cmcl.user.logout();
     });
 
     $('#search_results').click(function() {
