@@ -92,10 +92,9 @@ cmcl.booking.updateBookings = function() {
                 $.each(intervalObjects, function(index, intervalObject) {
                     intervalObject.element.addClass(type === 'team' ? 'book-team' : 'book-plan');
                     if (type == 'team') {
-                      intervalObject.element.html('<div style="margin: 15px"><span>'+booking.team_name+'</span></div>');
+                      intervalObject.element.html('<div style="margin: 5px"><span>'+booking.team_name+'</span></div>');
                     } else if (type == 'plan') {
-                      intervalObject.element.html('<div style="margin: 15px"><span>'+booking.name+'</span></div>');
-                      intervalObject.element.text(booking.name);
+                      intervalObject.element.html('<div style="margin: 5px"><span>'+booking.name+'</span></div>');
                     }
                     intervalObject.data['booking'] = booking;
                 });
