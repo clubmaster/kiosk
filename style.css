@@ -103,7 +103,7 @@ label {
 
 .field {
   display: block;
-  height: 80px;
+  height: 76px;
 }
 
 .interval_wrapper {
@@ -114,12 +114,9 @@ label {
 }
 
 .interval {
-  width: 90%;
-  height: 90%;
-  margin: 5px;
+  height: 100%;
   border: 1px solid #404040;
   text-align:center;
-
   background: -webkit-linear-gradient(top, rgba(130,130,130,1) 0%,rgba(0,0,0,1) 80%,rgba(0,0,0,0.8) 100%);
 }
 
