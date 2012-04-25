@@ -12,11 +12,34 @@ cmcl.booking.initialize = function() {
 
 cmcl.booking.updateFields = function() {
     var data = cmcl.data.fields[ cmcl.data.bookingdate.toYYYYMMDD() ],
-        hourWidth = 115,
+        hourWidth = cmcl.app['min_width'];
         hours = Math.ceil(new Date( new Date(data.info.end_time) - new Date(data.info.start_time) ).getHours());
 
     $('#overflow').children().remove();
     cmcl.data.intervalObjects = [];
+
+    var fields = 0;
+    var intervals = 0;
+    var max_intervals = 0;
+
+    $.each(data.fields, function(index, field) {
+        fields++;
+        $.each(field.intervals, function(index, interval) {
+            intervals++;
+        });
+
+        if (intervals > max_intervals) {
+          max_intervals = intervals;
+        }
+        intervals = 0;
+    });
+    if (max_intervals > 0) {
+      var width = $("div#overflow").width()-60;
+      var nf_width = width/max_intervals;
+      if (nf_width > cmcl.app['min_width']) {
+        hourWidth = nf_width;
+      }
+    }
 
     $.each(data.fields, function(index, field) {
         var fieldElement = $('<div />', {
@@ -25,7 +48,6 @@ cmcl.booking.updateFields = function() {
 
         fieldElement.width(hours * hourWidth - hourWidth / 2);
         $('#overflow').append(fieldElement);
-
 
         $.each(field.intervals, function(index, interval) {
             var wrapperElement = $('<div />', {
@@ -60,6 +82,16 @@ cmcl.booking.updateFields = function() {
             intervalElement.append('<div style="margin:30px;"><span>'+field.name+'</span></div>');
         });
     });
+
+    if (fields > 0) {
+      var height = $("div#overflow").height()-35;
+      var nf_height = height/fields;
+      if (nf_height > cmcl.app['min_height']) {
+        $(".field").css('height', (nf_height+1)+'px');
+        $(".interval_wrapper").css('height', nf_height+'px');
+      }
+    }
+
 };
 
 

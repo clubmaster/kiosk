@@ -8,7 +8,9 @@ cmcl.booking = {};
 cmcl.user = {};
 cmcl.keysbound = false;
 cmcl.app = {
-  'timeout': 30000
+  'timeout': 30000,
+  'min_height': 20,
+  'min_width': 115
 }
 
 cmcl.data = {
