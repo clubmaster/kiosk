@@ -1,7 +1,7 @@
 cmcl = { };
 cmcl.loadingcycles = 0;
 cmcl.ajax = {
-    base: 'http://demo.clubmaster.dk/api/',
+    base: 'http://booking.aalborgtennisklub.dk/api/',
     api_key: 'THIS_IS_A_DEMO_KEY'
 };
 cmcl.booking = {};
@@ -15,7 +15,7 @@ cmcl.app = {
 }
 
 cmcl.data = {
-    location_id: 1,
+    location_id: 2,
     user: null,
     users: null,
     fields: {},
@@ -51,6 +51,10 @@ cmcl.start = function() {
             $('#clock_widget').html(d.toString('dd/MM/yyyy')+' '+d.toLocaleTimeString());
         }, 1*1000);
 
+    $(".ui-widget-overlay").live("click", function() {  $("#interval_dialog").dialog("close"); } );
+    $(".ui-widget-overlay").live("click", function() {  $("#booking_dialog").dialog("close"); } );
+    $(".ui-widget-overlay").live("click", function() {  $("#login_dialog").dialog("close"); } );
+    $(".ui-widget-overlay").live("click", function() {  $("#user_search_dialog").dialog("close"); } );
 };
 
 Date.prototype.toYYYYMMDD = function() {
@@ -197,6 +201,7 @@ cmcl.initJQueryWidgets = function() {
             buttons: {
                 "Log ind": function() {
                     $('#login_dialog').dialog('open');
+                    $(this).dialog('close');
                 },
             },
         }
