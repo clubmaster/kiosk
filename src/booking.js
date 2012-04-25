@@ -47,11 +47,9 @@ cmcl.booking.updateFields = function() {
 
             cmcl.data.intervalObjects.push(intervalObject);
 
-            intervalElement.text(field.name);
             intervalElement.click( function() {
                 cmcl.booking.showBookingDialog(intervalObject);
             });
-
 
             wrapperElement.width(intervalDelta * hourWidth + 'px');
             wrapperElement.css('left', startDelta * hourWidth  + 'px');
@@ -59,10 +57,9 @@ cmcl.booking.updateFields = function() {
             fieldElement.append(wrapperElement);
             wrapperElement.append(intervalElement);
             intervalElement.append('<div style="margin:5px;"><span style="float:left;">'+ formatStart +'</span><span style="float:right;">' + formatEnd + '</span></div>');
+            intervalElement.append('<div style="margin:30px;"><span>'+field.name+'</span></div>');
         });
-
     });
-
 };
 
 
