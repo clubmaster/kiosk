@@ -123,6 +123,7 @@ cmcl.initJQueryWidgets = function() {
 
     $('input:submit, button').button();
     $('#button_logout').hide();
+    $('#auth_dialog').hide();
 
     $("#booking_date_picker").datepicker(
         {

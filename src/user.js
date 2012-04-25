@@ -6,6 +6,7 @@ cmcl.user.logout = function() {
   if (cmcl.data.user != null) {
     cmcl.data.user = null;
     $('#button_logout').hide();
+    $('#auth_dialog').hide();
     $('#button_login').show();
 
     cmcl.booking.updateFields();

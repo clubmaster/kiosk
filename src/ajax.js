@@ -9,11 +9,14 @@ cmcl.ajax.login = function(username, password) {
         $('#login_dialog').dialog('close');
         $('#button_logout').show();
         $('#button_login').hide();
+        $('#auth_dialog').show();
 
         cmcl.data.user = $.parseJSON(json).data;
         cmcl.booking.updateFields();
         cmcl.booking.updateBookings();
         cmcl.decrementLoading();
+
+        $('#auth_user').text(cmcl.data.user.first_name+' '+cmcl.data.user.last_name);
     };
     var error = function(jqXHR, textStatus, errorThrown) {
         $('#login_dialog_error').text('Forkert brugernavn el. password');
