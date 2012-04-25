@@ -28,7 +28,7 @@ cmcl.start = function() {
     // Setup page by doing an initial resize.
     cmcl.onresize();
 
-    var timeout = 15000;
+    var timeout = 30000;
     $(document).bind("idle.idleTimer", function(){
       cmcl.data.user = null;
       $('#button_logout').hide();
