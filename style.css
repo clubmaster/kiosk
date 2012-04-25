@@ -1,4 +1,6 @@
 body {
+  background-image: url('images/bg4.png');
+  background-repeat: repeat;
 	display: -webkit-box;
 	-webkit-box-pack: center;
 	-webkit-box-align: start;
@@ -27,15 +29,9 @@ body {
 		#000000 0px 0px 3px,
 		#000000 0px 0px 3px
 	; */
-
-}
-
-img#bgimage {
-  opacity: 0.6;
 }
 
 bg {
-	background-image: url('images/clay-court.jpg');
 	position:absolute;
 	top:0px;
 	bottom: 0px;
