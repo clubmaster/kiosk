@@ -100,7 +100,7 @@ cmcl.booking.updateFields = function() {
     var now = new Date();
     var diff = now.getTime()-start_time.getTime();
     diff = diff/1000/60/60;
-    $('#overflow').scrollLeft(hourWidth*diff);
+    $('#overflow').scrollLeft((hourWidth*diff)-100);
 };
 
 
