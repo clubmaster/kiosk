@@ -30,7 +30,7 @@ cmcl.ajax.login = function(username, password) {
         error: error
     };
 
-    this.authHeader = authHeader;
+    cmcl.user.authHeader = authHeader;
 
     $.ajax( settings );
     cmcl.incrementLoading();
@@ -42,7 +42,7 @@ cmcl.ajax.getUsers = function() {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_message').text('Fejl med internettet prï¿½v igen...');
         $('#error_dialog').dialog('open');
         cmcl.decrementLoading();
     };
@@ -63,7 +63,7 @@ cmcl.ajax.getLocations = function() {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_message').text('Fejl med internettet prï¿½v igen...');
         $('#error_dialog').dialog('open');
         cmcl.decrementLoading();
     };
@@ -87,7 +87,7 @@ cmcl.ajax.getFields = function(locationid, date) {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_message').text('Fejl med internettet prï¿½v igen...');
         $('#error_dialog').dialog('open');
         cmcl.decrementLoading();
     };
@@ -109,7 +109,7 @@ cmcl.ajax.getBookings = function(locationid, date) {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_message').text('Fejl med internettet prï¿½v igen...');
         $('#error_dialog').dialog('open');
         cmcl.decrementLoading();
     };
@@ -139,13 +139,13 @@ cmcl.ajax.bookField = function(date, interval_id, user_id) {
             $('#error_message').text(message);
             $('#error_dialog').dialog('open');
         } else {
-            $('#error_message').text('Fejl med internettet prøv igen...');
+            $('#error_message').text('Fejl med internettet prï¿½v igen...');
             $('#error_dialog').dialog('open');
         }
         cmcl.decrementLoading();
     };
     var settings = {
-        headers: this.authHeader,
+        headers: cmcl.user.authHeader,
         url: this.base + 'bookings/book/' + date.toYYYYMMDD() + '/' + interval_id + '/' + user_id,
         type: 'POST',
         success: success,
@@ -171,13 +171,13 @@ cmcl.ajax.bookFieldGuest = function(date, interval_id) {
             $('#error_message').text(message);
             $('#error_dialog').dialog('open');
         } else {
-            $('#error_message').text('Fejl med internettet prøv igen...');
+            $('#error_message').text('Fejl med internettet prï¿½v igen...');
             $('#error_dialog').dialog('open');
         }
         cmcl.decrementLoading();
     };
     var settings = {
-        headers: this.authHeader,
+        headers: cmcl.user.authHeader,
         url: this.base + 'bookings/book/' + date.toYYYYMMDD() + '/' + interval_id + '/guest',
         type: 'POST',
         success: success,
@@ -195,12 +195,12 @@ cmcl.ajax.cancelBooking = function(booking_id) {
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
-        $('#error_message').text('Fejl med internettet prøv igen...');
+        $('#error_message').text('Fejl med internettet prï¿½v igen...');
         $('#error_dialog').dialog('open');
         cmcl.decrementLoading();
     };
     var settings = {
-        headers: this.authHeader,
+        headers: cmcl.user.authHeader,
         url: this.base + 'bookings/cancel/' + booking_id,
         type: 'POST',
         success: success,

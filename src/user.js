@@ -8,7 +8,8 @@ cmcl.user.logout = function() {
     $('#button_logout').hide();
     $('#auth_dialog').hide();
     $('#button_login').show();
-
+    
+    cmcl.user.authHeader = null;
     cmcl.booking.updateFields();
     cmcl.booking.updateBookings();
   }
