@@ -176,8 +176,18 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
     $('.interval_time span').text(start.toString('HH:mm')+' - '+end.toString('HH:mm'));
 
     if (data.booking) {
+      $('.interval_confirmed').hide();
       $('.interval_booker').show();
+
       if (data.booking.type == 'booking') {
+        $('.interval_confirmed').show();
+
+        if (data.booking.confirmed) {
+          $('.interval_confirmed span').text('Ja');
+        } else {
+          $('.interval_confirmed span').text('Nej');
+        }
+
         var userBooking = cmcl.data.user && (cmcl.data.user.id === data.booking.user.id || (data.booking.users && cmcl.data.user.id === data.booking.users[0].id)) && !past;
         if (userBooking) {
           $(".ui-dialog-buttonpane button:contains('Slet')").button("enable");
@@ -206,6 +216,7 @@ cmcl.booking.showBookingDialog = function(intervalObject) {
       $(".ui-dialog-buttonpane button:contains('Slet')").button("disable");
       $('.interval_booker').hide();
       $('.interval_partner').hide();
+      $('.interval_confirmed').hide();
     }
 
     if (past || data.booking) {
