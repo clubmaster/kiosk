@@ -9,7 +9,7 @@ cmcl.user = {};
 cmcl.keysbound = false;
 cmcl.app = {
   'timeout': 30,
-  'refresh_overview': 300,
+  'refresh_overview': 600,
   'min_height': 20,
   'min_width': 115
 }
@@ -42,8 +42,12 @@ cmcl.start = function() {
 
     // update bookings
     setInterval(function() {
+      var active = $.data(document, 'idleTimer');
+      if (active == 'idle') {
         cmcl.booking.initialize();
-        }, cmcl.app['refresh_overview']*1000);
+        $("#booking_date_picker").datepicker( "setDate" , new Date());
+      }
+    }, cmcl.app['refresh_overview']*1000);
 
     // update clock
     setInterval(function() {
