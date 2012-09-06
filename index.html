@@ -5,6 +5,7 @@
    	<link href="keyboard.css" rel="stylesheet" type="text/css">
    	<link href="smoothness.css" rel="stylesheet" type="text/css" />
    	<link href="loadmask.css" rel="stylesheet" type="text/css" />
+   	<link href="li-scroller.css" rel="stylesheet" type="text/css" />
 
 	<script type="text/javascript" src="plugins/jquery-1.7.2.js"></script>
 	<script type="text/javascript" src="plugins/jquery.base64.js"></script>
@@ -15,6 +16,7 @@
 	<script type="text/javascript" src="plugins/jquery-ui-1.8.18.custom.min.js"></script>
 	<script type="text/javascript" src="plugins/jquery.ui.datepicker-da.js"></script>
 	<script type="text/javascript" src="plugins/jquery.idle-timer.js"></script>
+	<script type="text/javascript" src="plugins/jquery.li-scroller.1.0.js"></script>
 
 
 	<script type="text/javascript" src="src/init.js"></script>
@@ -22,8 +24,19 @@
 	<script type="text/javascript" src="src/page.js"></script>
 	<script type="text/javascript" src="src/booking.js"></script>
 	<script type="text/javascript" src="src/user.js"></script>
+        <script>
+          $(function(){
+            $("ul#ticker01").liScroll();
+          });
+        </script>
 </head>
 <body onload="cmcl.start();" onselectstart="return false;">
+
+  <div class="tickeroverlay">
+    <ul id="ticker01">
+      <li>Der er ingen nyheder</li>
+    </ul>
+  </div>
 
 <app class="box vert pack-center">
 
