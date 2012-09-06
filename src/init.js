@@ -1,7 +1,7 @@
 cmcl = { };
 cmcl.loadingcycles = 0;
 cmcl.ajax = {
-    base: 'http://nibetest.hollo.dk/api/',
+    base: 'http://nibe.clubmaster.dk/api/',
     api_key: 'THIS_IS_A_DEMO_KEY'
 };
 cmcl.booking = {};
@@ -31,8 +31,8 @@ cmcl.start = function() {
     cmcl.attachListeners();
     cmcl.initJQueryWidgets();
 
+    cmcl.ajax.getTickers();
     cmcl.booking.initialize();
-    cmcl.ticker.initialize();
 
     // Setup page by doing an initial resize.
     cmcl.onresize();
@@ -59,8 +59,8 @@ cmcl.start = function() {
         }, 1*1000);
 
     setInterval(function() {
-            cmcl.ticker.initialize();
-        }, 10*1000);
+          cmcl.ajax.getTickers();
+        }, 1800*1000);
 
 
     $(".ui-widget-overlay").live("click", function() {  $("#interval_dialog").dialog("close"); } );

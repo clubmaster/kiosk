@@ -1,5 +1,4 @@
 cmcl.ticker.initialize = function() {
-  cmcl.ajax.getTickers();
 
   if (!(cmcl.data.tickers instanceof Array) || cmcl.data.tickers.length == 0) {
     $('.tickeroverlay').hide();

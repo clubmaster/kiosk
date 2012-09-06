@@ -39,6 +39,7 @@ cmcl.ajax.login = function(username, password) {
 cmcl.ajax.getTickers = function() {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.tickers = $.parseJSON(json).data;
+        cmcl.ticker.initialize();
         cmcl.decrementLoading();
     };
     var error = function(jqXHR, textStatus, errorThrown) {
