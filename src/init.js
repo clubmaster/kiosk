@@ -1,7 +1,7 @@
 cmcl = { };
 cmcl.loadingcycles = 0;
 cmcl.ajax = {
-    base: 'http://nibe.clubmaster.dk/api/',
+    base: 'http://demo.clubmaster.dk/api/',
     api_key: 'THIS_IS_A_DEMO_KEY'
 };
 cmcl.booking = {};
