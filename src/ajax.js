@@ -36,6 +36,28 @@ cmcl.ajax.login = function(username, password) {
     cmcl.incrementLoading();
 };
 
+cmcl.ajax.getTickers = function() {
+    var success = function(json, textStatus, jqXHR) {
+        cmcl.data.tickers = $.parseJSON(json).data;
+        cmcl.ticker.initialize();
+        cmcl.decrementLoading();
+    };
+    var error = function(jqXHR, textStatus, errorThrown) {
+        $('#error_message').text('Fejl med internettet pr�v igen...');
+        $('#error_dialog').dialog('open');
+        cmcl.decrementLoading();
+    };
+    var settings = {
+        url: this.base + 'news',
+        type: 'GET',
+        success: success,
+        error: error
+    };
+
+    $.ajax( settings );
+    cmcl.incrementLoading();
+};
+
 cmcl.ajax.getUsers = function() {
     var success = function(json, textStatus, jqXHR) {
         cmcl.data.users = $.parseJSON(json).data;

@@ -1,10 +1,11 @@
 cmcl = { };
 cmcl.loadingcycles = 0;
 cmcl.ajax = {
-    base: 'http://booking.aalborgtennisklub.dk/api/',
+    base: 'http://demo.clubmaster.dk/api/',
     api_key: 'THIS_IS_A_DEMO_KEY'
 };
 cmcl.booking = {};
+cmcl.ticker = {};
 cmcl.user = {};
 cmcl.keysbound = false;
 cmcl.app = {
@@ -15,9 +16,10 @@ cmcl.app = {
 }
 
 cmcl.data = {
-    location_id: 2,
+    location_id: 1,
     user: null,
     users: null,
+    tickers: null,
     fields: {},
     bookings: {},
     bookingdate: new Date(),
@@ -29,6 +31,7 @@ cmcl.start = function() {
     cmcl.attachListeners();
     cmcl.initJQueryWidgets();
 
+    cmcl.ajax.getTickers();
     cmcl.booking.initialize();
 
     // Setup page by doing an initial resize.
@@ -55,6 +58,11 @@ cmcl.start = function() {
             var d = new Date();
             $('#clock_widget').html(d.toString('dd/MM/yyyy')+' '+d.toLocaleTimeString());
         }, 1*1000);
+
+    setInterval(function() {
+          cmcl.ajax.getTickers();
+        }, 1800*1000);
+
 
     $(".ui-widget-overlay").live("click", function() {  $("#interval_dialog").dialog("close"); } );
     $(".ui-widget-overlay").live("click", function() {  $("#booking_dialog").dialog("close"); } );
@@ -246,5 +254,3 @@ cmcl.initJQueryWidgets = function() {
         }
     );
 };
-
-

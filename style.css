@@ -205,3 +205,15 @@ option {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(0,0,0,0.4);
 }
+
+div.tickeroverlay {
+  z-index: 500;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: -webkit-linear-gradient(bottom, YELLOW, ORANGE);
+  background-color: YELLOW;
+  border-top: 1px #000000 solid;
+  color: #000000;
+  padding: 2px;
+}
