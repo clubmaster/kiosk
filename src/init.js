@@ -46,6 +46,7 @@ cmcl.start = function() {
       if (active == 'idle') {
         cmcl.booking.initialize();
         $("#booking_date_picker").datepicker( "setDate" , new Date());
+        cmcl.data.bookingdate = new Date();
       }
     }, cmcl.app['refresh_overview']*1000);
 

@@ -47,7 +47,7 @@ cmcl.ajax.getUsers = function() {
         cmcl.decrementLoading();
     };
     var settings = {
-        url: this.base + 'users/',
+        url: this.base + 'users',
         type: 'GET',
         success: success,
         error: error
@@ -68,7 +68,7 @@ cmcl.ajax.getLocations = function() {
         cmcl.decrementLoading();
     };
     var settings = {
-        url: this.base + 'locations/',
+        url: this.base + 'locations',
         type: 'GET',
         success: success,
         error: error
